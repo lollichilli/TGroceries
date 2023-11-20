@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block content %}
+<div class="mui-container">
+  <h2>Our current products!</h2>
+  <table class="mui-table">
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Product Image</th>
+        <th>Product Kind</th>
+        <th>Owner</th>
+        <th>Price ($)</th>
+        <th>Quantity</th>
+        <th>Add to Cart</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in list %}
+      <tr>
+        <td>{{ row.name }}</td>
+        <td><img src="{{ row.image_url }}" alt="{{ row.name }}" width="80" height="80"></td>
+        <td>{{ row.kind }}</td>
+        <td>{{ row.owner }}</td>
+        <td>{{ row.price }}</td>
+        <td>
+          <input type="number" name="quantity_{{ row.name }}" value="1" min="1" max="100">
+        </td>
+        <td>
+          <button class="mui-btn mui-btn--primary" onclick="addToCart('{{ row.name }}')">Add to Cart</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+  function addToCart(productName) {
+    var quantity = document.getElementsByName("quantity_" + productName)[0].value;
+
+    $.ajax({
+      type: "POST",
+      url: "/add_to_cart",
+      data: { product_name: productName, quantity: quantity },
+      success: function(response) {
+        alert(response.message);
+        window.location.href = "/cart";
+      }
+    });
+  }
+</script>
+{% endblock %}
+

@@ -1,0 +1,58 @@
+{% extends "base.html" %} 
+{% block content %}
+<div class="mui-container">
+  <h2>Shopping Cart</h2>
+  <table class="mui-table">
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Image</th>
+        <th>Kind</th>
+        <th>Quantity</th>
+        <th>Price ($)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product, details in cart_items.items() %}
+      <tr>
+        <td>{{ product }}</td>
+        <td><img src="{{ details.image_url }}" alt="{{ product }}" width="80" height="80"></td>
+        <td>{{ details.kind }}</td>
+        <td>{{ details.quantity }}</td>
+        <td>{{ details.price }}</td>
+        <td>
+          <button class="mui-btn mui-btn--danger" onclick="removeItem('{{ product }}')">Remove</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3"></td>
+        <td><strong>Total Price</strong></td>
+        <td>{{ total_amount }}</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+<script>
+  function removeItem(productName) {
+    console.log("Removing item:", productName);
+    $.ajax({
+      type: "POST",
+      url: "/remove_from_cart",
+      data: { product_name: productName },
+      success: function(response) {
+        if (response.success) {
+          // Update the total amount in the table
+          document.getElementById("totalAmount").innerText = response.total_amount;
+          // Remove the table row for the removed item
+          document.getElementById(`row_${productName}`).remove();
+        } else {
+          alert(response.message);
+        }
+      }
+    });
+  }
+</script>
+{% endblock %}

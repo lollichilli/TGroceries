@@ -1,0 +1,36 @@
+{% extends "base.html" %} 
+{% block content %}
+<div class="mui-container">
+  <h2>Owner's Dashboard</h2>
+  <table class="mui-table">
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Product Image</th>
+        <th>Product Kind</th>
+        <th>Owner</th>
+        <th>Price ($)</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in list %}
+      <tr>
+        <td>{{ row.name }}</td>
+        <td><img src="{{ row.image_url }}" alt="{{ row.name }}" width="80" height="80"></td>
+        <td>{{ row.kind }}</td>
+        <td>{{ row.owner }}</td>
+        <td>{{ row.price }}</td>
+        <td>
+          <a class="mui-btn mui-btn--primary" href="{{ url_for('edit_product', name=row.name) }}">Edit</a>
+          <a class="mui-btn mui-btn--danger" href="{{ url_for('remove_product', name=row.name) }}">Remove</a>
+        </td>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a class="mui-btn mui-btn--primary" href="{{ url_for('show_admin_ui') }}">Add Product</a>
+</div>
+{% endblock %}
+

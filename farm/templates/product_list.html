@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+</head>
+<body>
+    <h1>List of Products</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Kind</th>
+                <th>Owner</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>
+                    <a href="{{ url_for('edit_product', product_id=product.id) }}">Edit</a>
+                </td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.kind }}</td>
+                <td>{{ product.owner }}</td>
+                <td>{{ product.price }}</td>
+                <td>
+                    <a href="/products/{{ product.id }}/edit">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+

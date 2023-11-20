@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% block content %}
+<div class="mui-container">
+  <h2>Add a new product</h2>
+  <div class=""mui-form">
+    <form action="/add" method="POST" class="form">
+      <div class="mui-textfield">
+        <label class="">Product Name</label>
+        <input type="text" name="fruit_name" required/>
+      </div>
+      <div class="mui-textfield">
+        <label class="">Product Kind</label>
+        <input type="text" name="fruit_kind" required/>
+      </div>
+      <div class="mui-textfield">
+        <label class="">Owner</label>
+        <input type="text" name="fruit_owner" required/>
+      </div>
+      <div class="mui-textfield">
+        <label class="">Price </label>
+        <input type="number" name="fruit_price" required/>
+      </div>
+      <div class="mui-textfield">
+        <label class="">Product Image URL</label>
+        <input type="text" name="image_url" required/>
+      </div>
+      <div class="">
+        <input type="submit" class="mui-btn mui-btn--primary" value="Add To The List" disable/>
+      </div>
+    </form>
+    <div class="">{{text}}</div>
+  </div>
+</div>
+{% endblock %}
+

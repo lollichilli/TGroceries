@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TGroceries</title>
+    <!-- load MUI -->
+    <link
+      href="//cdn.muicss.com/mui-0.10.1/css/mui.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="//cdn.muicss.com/mui-0.10.1/js/mui.min.js"></script>
+  </head>
+  <body>
+    <div class="mui-container mui--text-center">
+      <h1>Welcome to TGroceries</h1>
+    </div>
+    <div class="mui-container mui--text-center">
+        <a class="mui-btn mui-btn--primary" href="/list" disabled>I AM A CUSTOMER</a>
+        <a class="mui-btn mui-btn--primary" href="/owner">I'm the owner</a>
+    </div>
+    {% block content %} {% endblock %}
+  </body>
+</html>
+
